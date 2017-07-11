@@ -1,0 +1,713 @@
+<?php
+
+/*
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License or any later version.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+define('__MONETBIL__', true);
+
+abstract class Monetbil
+{
+
+    const WIDGET_URL = 'https://www.monetbil.com/widget/';
+    const GET_SERVICE_URL = 'https://api.monetbil.com/v1/services/get';
+    const CHECK_PAYMENT_URL = 'https://api.monetbil.com/payment/v1/checkPayment';
+    // Monetbil Widget version
+    const MONETBIL_WIDGET_VERSION_V1 = 'v1';
+    const MONETBIL_WIDGET_VERSION_V2 = 'v2';
+    // Live mode
+    const STATUS_SUCCESS = 1;
+    const STATUS_FAILED = 0;
+    const STATUS_CANCELLED = -1;
+    // Test mode
+    const STATUS_SUCCESS_TESTMODE = 7;
+    const STATUS_FAILED_TESTMODE = 8;
+    const STATUS_CANCELLED_TESTMODE = 9;
+
+    public static $serviceKey;
+    public static $serviceSecret;
+    public static $widgetVersion = 'v2';
+    // Setup Monetbil arguments
+    public static $amount;
+    public static $currency;
+    public static $phone;
+    public static $country;
+    public static $item_ref;
+    public static $payment_ref;
+    public static $user;
+    public static $first_name;
+    public static $last_name;
+    public static $email;
+    public static $return_url;
+    public static $notify_url;
+
+    /**
+     * getServiceKey
+     *
+     * @return string
+     */
+    public static function getServiceKey()
+    {
+        return Monetbil::$serviceKey;
+    }
+
+    /**
+     * setServiceKey
+     *
+     * @param string $serviceKey
+     * @return string
+     */
+    public static function setServiceKey($serviceKey)
+    {
+        Monetbil::$serviceKey = $serviceKey;
+    }
+
+    /**
+     * getServiceSecret
+     *
+     * @return string
+     */
+    public static function getServiceSecret()
+    {
+        return Monetbil::$serviceSecret;
+    }
+
+    /**
+     * setServiceSecret
+     *
+     * @param string $serviceSecret
+     * @return string
+     */
+    public static function setServiceSecret($serviceSecret)
+    {
+        Monetbil::$serviceSecret = $serviceSecret;
+    }
+
+    /**
+     * getWidgetVersion
+     *
+     * @return string
+     */
+    public static function getWidgetVersion()
+    {
+        return Monetbil::$widgetVersion;
+    }
+
+    /**
+     * getWidgetVersion
+     *
+     * @param string $widgetVersion
+     * @return string
+     */
+    public static function setWidgetVersion($widgetVersion)
+    {
+        self::$widgetVersion = $widgetVersion;
+    }
+
+    /**
+     * getAmount
+     *
+     * @return string
+     */
+    public static function getAmount()
+    {
+        return self::$amount;
+    }
+
+    /**
+     * setAmount
+     *
+     * @param string $amount
+     * @return string
+     */
+    public static function setAmount($amount)
+    {
+        self::$amount = $amount;
+    }
+
+    /**
+     * getCurrency
+     *
+     * @return string
+     */
+    public static function getCurrency()
+    {
+        return self::$currency;
+    }
+
+    /**
+     * setCurrency
+     *
+     * @param string $currency
+     * @return string
+     */
+    public static function setCurrency($currency)
+    {
+        self::$currency = $currency;
+    }
+
+    /**
+     * getPhone
+     *
+     * @return string
+     */
+    public static function getPhone()
+    {
+        return self::$phone;
+    }
+
+    /**
+     * setPhone
+     *
+     * @param string $phone
+     * @return string
+     */
+    public static function setPhone($phone)
+    {
+        self::$phone = $phone;
+    }
+
+    /**
+     * getCountry
+     *
+     * @return string
+     */
+    public static function getCountry()
+    {
+        return self::$country;
+    }
+
+    /**
+     * setCountry
+     *
+     * @param string $country
+     * @return string
+     */
+    public static function setCountry($country)
+    {
+        self::$country = $country;
+    }
+
+    /**
+     * getItem_ref
+     *
+     * @return string
+     */
+    public static function getItem_ref()
+    {
+        return self::$item_ref;
+    }
+
+    /**
+     * setItem_ref
+     *
+     * @param string $item_ref
+     * @return string
+     */
+    public static function setItem_ref($item_ref)
+    {
+        self::$item_ref = $item_ref;
+    }
+
+    /**
+     * getPayment_ref
+     *
+     * @return string
+     */
+    public static function getPayment_ref()
+    {
+        return self::$payment_ref;
+    }
+
+    /**
+     * setPayment_ref
+     *
+     * @param string $payment_ref
+     * @return string
+     */
+    public static function setPayment_ref($payment_ref)
+    {
+        self::$payment_ref = $payment_ref;
+    }
+
+    /**
+     * getUser
+     *
+     * @return string
+     */
+    public static function getUser()
+    {
+        return self::$user;
+    }
+
+    /**
+     * setUser
+     *
+     * @param string $user
+     * @return string
+     */
+    public static function setUser($user)
+    {
+        self::$user = $user;
+    }
+
+    /**
+     * getFirst_name
+     *
+     * @return string
+     */
+    public static function getFirst_name()
+    {
+        return self::$first_name;
+    }
+
+    /**
+     * setFirst_name
+     *
+     * @param string $first_name
+     * @return string
+     */
+    public static function setFirst_name($first_name)
+    {
+        self::$first_name = $first_name;
+    }
+
+    /**
+     * getLast_name
+     *
+     * @return string
+     */
+    public static function getLast_name()
+    {
+        return self::$last_name;
+    }
+
+    /**
+     * setLast_name
+     *
+     * @param string $last_name
+     * @return string
+     */
+    public static function setLast_name($last_name)
+    {
+        self::$last_name = $last_name;
+    }
+
+    /**
+     * getEmail
+     *
+     * @return string
+     */
+    public static function getEmail()
+    {
+        return self::$email;
+    }
+
+    /**
+     * setEmail
+     *
+     * @param string $email
+     * @return string
+     */
+    public static function setEmail($email)
+    {
+        self::$email = $email;
+    }
+
+    /**
+     * getReturn_url
+     *
+     * @return string
+     */
+    public static function getReturn_url()
+    {
+        return self::$return_url;
+    }
+
+    /**
+     * setReturn_url
+     *
+     * @param string $return_url
+     * @return string
+     */
+    public static function setReturn_url($return_url)
+    {
+        self::$return_url = $return_url;
+    }
+
+    /**
+     * getNotify_url
+     *
+     * @return string
+     */
+    public static function getNotify_url()
+    {
+        return self::$notify_url;
+    }
+
+    /**
+     * setNotify_url
+     *
+     * @param string $notify_url
+     * @return string
+     */
+    public static function setNotify_url($notify_url)
+    {
+        self::$notify_url = $notify_url;
+    }
+
+    /**
+     * getService
+     *
+     * @return array
+     */
+    public static function getService()
+    {
+        $postData = array(
+            'service_key' => Monetbil::getServiceKey(),
+            'service_secret' => Monetbil::getServiceSecret(),
+        );
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, Monetbil::GET_SERVICE_URL);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postData, '', '&'));
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+
+        $json = curl_exec($ch);
+        $result = json_decode($json, true);
+
+        if (is_array($result)) {
+            return $result;
+        }
+
+        return array();
+    }
+
+    /**
+     * sign
+     *
+     * @param string $service_secret
+     * @param array $params
+     * @return string
+     */
+    public static function sign($service_secret, $params)
+    {
+        ksort($params);
+        $signature = md5($service_secret . implode('', $params));
+        return $signature;
+    }
+
+    /**
+     * checkSign
+     *
+     * @param string $service_secret
+     * @param array $params
+     * @return boolean
+     */
+    public static function checkSign($service_secret, $params)
+    {
+        if (!array_key_exists('sign', $params)) {
+            return false;
+        }
+
+        $sign = $params['sign'];
+        unset($params['sign']);
+
+        $signature = Monetbil::sign($service_secret, $params);
+
+        return ($sign == $signature);
+    }
+
+    /**
+     * checkPayment
+     *
+     * @param string $paymentId
+     * @return array ($payment_status, $testmode)
+     */
+    public static function checkPayment($paymentId)
+    {
+        $postData = array(
+            'paymentId' => $paymentId
+        );
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, Monetbil::CHECK_PAYMENT_URL);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postData, '', '&'));
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+
+        $json = curl_exec($ch);
+        $result = json_decode($json, true);
+
+        $payment_status = 0;
+        $testmode = 0;
+        if (is_array($result) and array_key_exists('transaction', $result)) {
+            $transaction = $result['transaction'];
+
+            $payment_status = $transaction['status'];
+            $testmode = $transaction['testmode'];
+        }
+
+        return array($payment_status, $testmode);
+    }
+
+    /**
+     * getPost
+     *
+     * @param string $key
+     * @param string $default
+     * @return string | null
+     */
+    public static function getPost($key = null, $default = null)
+    {
+        return $key == null ? $_POST : (isset($_POST[$key]) ? $_POST[$key] : $default);
+    }
+
+    /**
+     * getQuery
+     *
+     * @param string $key
+     * @param string $default
+     * @return string | null
+     */
+    public static function getQuery($key = null, $default = null)
+    {
+        return $key == null ? $_GET : (isset($_GET[$key]) ? $_GET[$key] : $default);
+    }
+
+    /**
+     * getQueryParams
+     *
+     * @return array
+     */
+    public static function getQueryParams()
+    {
+        $queryParams = array();
+        $parts = explode('?', Monetbil::getUrl());
+
+        if (isset($parts[1])) {
+            parse_str($parts[1], $queryParams);
+        }
+
+        return $queryParams;
+    }
+
+    /**
+     * getServerUrl
+     *
+     * @return string | null
+     */
+    public static function getServerUrl()
+    {
+        $server_name = $_SERVER['SERVER_NAME'];
+        $port = $_SERVER['SERVER_PORT'];
+        $scheme = 'http';
+
+        if ('443' === $port) {
+            $scheme = 'https';
+        }
+
+        $url = $scheme . '://' . $server_name;
+        return $url;
+    }
+
+    /**
+     * getUrl
+     *
+     * @return string | null
+     */
+    public static function getUrl()
+    {
+        $url = Monetbil::getServerUrl() . Monetbil::getUri(true);
+        return $url;
+    }
+
+    /**
+     * getUri
+     *
+     * @param boolean $full
+     * @return string | null
+     */
+    public static function getUri($full = false)
+    {
+        $requestUri = $_SERVER['REQUEST_URI'];
+        $scriptFilename = $_SERVER['SCRIPT_FILENAME'];
+        $uri1 = '/' . ltrim($requestUri, '/');
+
+        if ($full) {
+            return $uri1;
+        }
+
+        $filename = '';
+        if (is_file($scriptFilename)) {
+            $filename = basename($scriptFilename);
+        }
+
+        $uri = str_replace('/' . $filename, '', $uri1);
+        return $uri;
+    }
+
+    /**
+     * getWidgetUrl
+     *
+     * @return string
+     */
+    public static function getWidgetUrl()
+    {
+        $version = Monetbil::getWidgetVersion();
+        $service_key = Monetbil::getServiceKey();
+        $widget_url = Monetbil::WIDGET_URL . $version . '/' . $service_key;
+        return $widget_url;
+    }
+
+    /**
+     * getWidgetV1Url
+     *
+     * @return string
+     */
+    public static function getWidgetV1Url($monetbil_args)
+    {
+        $monetbil_v1_redirect = Monetbil::getWidgetUrl() . '?' . http_build_query($monetbil_args, '', '&');
+        return $monetbil_v1_redirect;
+    }
+
+    /**
+     * form
+     *
+     * @param array $monetbil_args
+     * @return string
+     */
+    public static function form($monetbil_args)
+    {
+        $form = '<form action="' . Monetbil::getWidgetUrl() . '" method="post" data-monetbil="form">';
+
+        foreach ($monetbil_args as $key => $value) {
+            $form .= '<input type="hidden" name="' . $key . '" value="' . $value . '"/>';
+        }
+
+        $form .= '<button class="btn btn-block btn-primary m-t-20" type="submit" id="monetbil-payment-widget">Pay by Mobile Money</button>';
+
+        $form .= '</form>';
+        return $form;
+    }
+
+    /**
+     * url
+     *
+     * @param array $monetbil_args
+     * @return string
+     */
+    public static function url($monetbil_args)
+    {
+        $url = Monetbil::getWidgetV1Url($monetbil_args);
+        return $url;
+    }
+
+    /**
+     * button
+     *
+     * @param array $monetbil_args
+     * @return string
+     */
+    public static function button($monetbil_args)
+    {
+        $url = Monetbil::url($monetbil_args);
+        $button = '<a class="btn btn-block btn-primary m-t-20" id="monetbil-payment-widget" href="' . $url . '">Pay by Mobile Money</a>';
+        return $button;
+    }
+
+    /**
+     * redirect
+     *
+     * @param array $monetbil_args
+     * @return string
+     */
+    public static function redirect($monetbil_args)
+    {
+        $url = Monetbil::url($monetbil_args);
+        header("Location: $url");
+    }
+
+    /**
+     * startPayment
+     *
+     * @param array $monetbil_args
+     * @return string
+     */
+    public static function startPayment($monetbil_args = array())
+    {
+        $query_data = array_merge(array(
+            'amount' => Monetbil::getAmount(),
+            'phone' => Monetbil::getPhone(),
+            'country' => Monetbil::getCountry(),
+            'currency' => Monetbil::getCurrency(),
+            'item_ref' => Monetbil::getItem_ref(),
+            'payment_ref' => Monetbil::getPayment_ref(),
+            'user' => Monetbil::getUser(),
+            'first_name' => Monetbil::getFirst_name(),
+            'last_name' => Monetbil::getLast_name(),
+            'email' => Monetbil::getEmail(),
+            'return_url' => Monetbil::getServerUrl() . Monetbil::getUri() . '/return.php',
+            'notify_url' => Monetbil::getServerUrl() . Monetbil::getUri() . '/notify.php'
+                ), $monetbil_args);
+
+        $payment_url = Monetbil::getServerUrl() . Monetbil::getUri()
+                . '/payment.php?'
+                . http_build_query($query_data, '', '&');
+
+        header("Location: $payment_url");
+        exit;
+    }
+
+    /**
+     * formatInt
+     *
+     * @param string $string
+     * @return string
+     */
+    public static function formatInt($string)
+    {
+        $string = (string) $string;
+        $string2 = explode('.', $string);
+        $string3 = $string2[0];
+
+        $parts = array();
+        for ($index = strlen($string3) - 1, $i = 0; $index >= 0; $index--, $i++) {
+            if ($i > 0 and 0 == $i % 3) {
+                $parts[$i] = $string3[$index] . ' ';
+            } else {
+                $parts[$i] = $string3[$index];
+            }
+        }
+
+        $res = implode('', array_reverse($parts));
+
+        if (isset($string2[1])) {
+            $res = $res . '.' . $string2[1];
+        }
+
+        return $res;
+    }
+
+}
+
+require_once 'config.php';
