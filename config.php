@@ -17,7 +17,9 @@ if (!defined('__MONETBIL__')) {
     exit;
 }
 
-// https://www.monetbil.com/services
+// To get your service key and secret, go to -> https://www.monetbil.com/services
 Monetbil::setServiceKey('YOUR_SERVICE_KEY');
 Monetbil::setServiceSecret('YOUR_SERVICE_SERCRET');
+
+// To use responsive widget, set version to v2
 Monetbil::setWidgetVersion('v2');
