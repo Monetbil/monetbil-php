@@ -6,7 +6,9 @@ This repository contains the open source PHP SDK that allows you to access the M
 
 https://github.com/Monetbil/monetbil-php/archive/master.zip
 
-## Configuration
+### Configuration
+
+The configuration is located in `config.php` file.
 
 ```php
 <?php
@@ -17,5 +19,59 @@ Monetbil::setServiceSecret('YOUR_SERVICE_SERCRET');
 
 // To use responsive widget, set version to v2
 Monetbil::setWidgetVersion('v2');
+
+```
+
+### Payment Widget Usage
+
+#### Example 1
+
+```php
+<?php
+
+require_once 'monetbil.php';
+
+// Setup Monetbil arguments
+Monetbil::setAmount(500);
+Monetbil::setCurrency('XAF');
+Monetbil::setPhone('');
+Monetbil::setCountry('');
+Monetbil::setItem_ref('2536');
+Monetbil::setPayment_ref('d4be3535f9cb5a7aff1f84fa94e6f040');
+Monetbil::setUser(12);
+Monetbil::setFirst_name('KAMDEM');
+Monetbil::setLast_name('Jean');
+Monetbil::setEmail('sergentong@gmailcom');
+
+// Start a payment
+// You must be redirected to the payment page
+Monetbil::startPayment();
+
+```
+
+#### Example 2
+
+```php
+<?php
+
+require_once 'monetbil.php';
+
+// Setup Monetbil arguments
+$monetbil_args = array(
+    'amount' => 500,
+    'phone' => '',
+    'country' => '',
+    'currency' => 'XAF',
+    'item_ref' => '2536',
+    'payment_ref' => 'd4be3535f9cb5a7aff1f84fa94e6f040',
+    'user' => 12,
+    'first_name' => 'KAMDEM',
+    'last_name' => 'Jean',
+    'email' => 'user@emailcom'
+);
+
+// Start a payment
+// You must be redirected to the payment page
+Monetbil::startPayment($monetbil_args);
 
 ```
