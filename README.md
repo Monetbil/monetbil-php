@@ -6,6 +6,10 @@ This repository contains the open source PHP SDK that allows you to access the M
 
 https://github.com/Monetbil/monetbil-php/archive/master.zip
 
+## Payment integration
+
+When the user decides to make a purchase, you will initialize Monetbil PHP SDK and whenever the payment is completed, your application will be notified using your implementation of the `notify.php` file.
+
 ### Configuration
 
 The configuration is located in `config.php` file.
