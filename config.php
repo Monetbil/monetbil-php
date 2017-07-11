@@ -17,6 +17,7 @@ if (!defined('__MONETBIL__')) {
     exit;
 }
 
-Monetbil::setServiceKey('j9XjZzkFqjeL5fk34e1RNq98thRRwvYf');
-Monetbil::setServiceSecret('oxr6Dyw80KlpJefIK7UyywXGHvkOM617wBBIXdZ1NTMWGZ9bSDyJmfX5oMI96204');
+// https://www.monetbil.com/services
+Monetbil::setServiceKey('YOUR_SERVICE_KEY');
+Monetbil::setServiceSecret('YOUR_SERVICE_SERCRET');
 Monetbil::setWidgetVersion('v2');
