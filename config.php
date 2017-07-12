@@ -21,5 +21,5 @@ if (!defined('__MONETBIL__')) {
 Monetbil::setServiceKey('j9XjZzkFqjeL5fk34e1RNq98thRRwvYf');
 Monetbil::setServiceSecret('oxr6Dyw80KlpJefIK7UyywXGHvkOM617wBBIXdZ1NTMWGZ9bSDyJmfX5oMI96204');
 
-// To use responsive widget, set version to v2
+// To use responsive widget, set version to 'v2'
 Monetbil::setWidgetVersion('v2');
