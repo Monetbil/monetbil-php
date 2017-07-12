@@ -75,7 +75,7 @@ Monetbil::startPayment();
 
 ```
 
-#### Example 2
+#### Or example 2
 
 ```php
 <?php
@@ -102,9 +102,9 @@ Monetbil::startPayment($monetbil_args);
 
 ```
 
-You can integrate the payment on your own page.
+### You can integrate the payment on your own page.
 
-##### For version 2
+#### For version 2
 
 *Example 3:*
 
@@ -130,7 +130,7 @@ echo Monetbil::form();
 
 ```
 
-*Example 4:*
+*Or example 4:*
 
 ```php
 <?php
@@ -156,7 +156,7 @@ echo Monetbil::form($monetbil_args);
 
 ```
 
-*Example Response:*
+*Example 3 and 4 response::*
 
 ```html
 <form action="https://www.monetbil.com/widget/v2/j9XjZzkFqjeL5fk34e1RNq98thRRwvYf" method="post" data-monetbil="form">
@@ -178,9 +178,9 @@ echo Monetbil::form($monetbil_args);
 
 ```
 
-##### For version 1
+#### For version 1
 
-Please, change widget version to `v1` in `config.php` file
+Please, change widget version to `v1` in `config.php` file.
 
 ```php
 <?php
@@ -213,7 +213,7 @@ echo Monetbil::link();
 
 ```
 
-*Example 6:*
+*Or example 6:*
 
 ```php
 <?php
@@ -239,10 +239,17 @@ echo Monetbil::link($monetbil_args);
 
 ```
 
-*Example Response:*
+*Example 5 and 6 response:*
+
 ```html
 
 <a class="btn btn-block btn-primary m-t-20" id="monetbil-payment-widget" href="https://www.monetbil.com/widget/v1/j9XjZzkFqjeL5fk34e1RNq98thRRwvYf?amount=500&amp;phone=&amp;country=&amp;currency=XAF&amp;item_ref=2536&amp;payment_ref=d4be3535f9cb5a7aff1f84fa94e6f040&amp;user=12&amp;first_name=KAMDEM&amp;last_name=Jean&amp;email=jean.kamdem%40email.com&amp;return_url=http%3A%2F%2Fboorgeon.com%2Fmonetbil-php%2Fmonetbil%2Freturn.php&amp;notify_url=http%3A%2F%2Fboorgeon.com%2Fmonetbil-php%2Fmonetbil%2Fnotify.php">Pay by Mobile Money</a>
 <script type="text/javascript" src="http://example.com/monetbil-php/monetbil/assets/js/monetbil-mobile-payments.js?t=1499852514"></script>
 
 ```
+
+If you have any questions or need help, do not hesitate to contact us at [support@monetbil.com](https://www.monetbil.com/contact/support/?referral=github)
+
+## License
+
+Please refer to this repo's [LICENSE](LICENSE).
