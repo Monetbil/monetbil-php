@@ -11,19 +11,22 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-require_once 'monetbil.php';
+
+require_once '../monetbil.php';
 
 // Setup Monetbil arguments
-Monetbil::setAmount(500);
-Monetbil::setCurrency('XAF');
-Monetbil::setPhone('');
-Monetbil::setCountry('');
-Monetbil::setItem_ref('2536');
-Monetbil::setPayment_ref('d4be3535f9cb5a7aff1f84fa94e6f040');
-Monetbil::setUser(12);
-Monetbil::setFirst_name('KAMDEM');
-Monetbil::setLast_name('Jean');
-Monetbil::setEmail('sergentong@gmailcom');
+$monetbil_args = array(
+    'amount' => 500,
+    'phone' => '',
+    'country' => '',
+    'currency' => 'XAF',
+    'item_ref' => '2536',
+    'payment_ref' => 'd4be3535f9cb5a7aff1f84fa94e6f040',
+    'user' => 12,
+    'first_name' => 'KAMDEM',
+    'last_name' => 'Jean',
+    'email' => 'jean.kamdem@email.com'
+);
 
-// Start a payment
-Monetbil::startPayment();
+// This example show payment link
+echo Monetbil::link($monetbil_args);

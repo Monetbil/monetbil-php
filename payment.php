@@ -48,11 +48,9 @@
                             <div class="h2"><?php echo Monetbil::formatInt($monetbil_args['amount']); ?></div>
                             <span>FCFA</span>
                             <?php if (Monetbil::MONETBIL_WIDGET_VERSION_V2 == Monetbil::getWidgetVersion()): ?>
-                                <?php echo Monetbil::form($monetbil_args); ?>
-                                <script type="text/javascript" src="assets/js/monetbil.min.js"></script>
+                                <?php echo Monetbil::form($monetbil_args, '-auto'); ?>
                             <?php else: ?>
-                                <?php echo Monetbil::button($monetbil_args); ?>
-                                <script type="text/javascript" src="assets/js/monetbil-mobile-payments.js"></script>
+                                <?php echo Monetbil::link($monetbil_args, '-auto'); ?>
                             <?php endif; ?>
                         </div>
                     </div>
