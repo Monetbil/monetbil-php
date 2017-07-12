@@ -2,6 +2,10 @@
 
 This repository contains the open source PHP SDK that allows you to access the Monetbil Platform from your PHP app.
 
+### Requirements
+
+PHP 5.2 and later.
+
 ### Download the SDK
 
 https://github.com/Monetbil/monetbil-php/archive/master.zip
@@ -26,6 +30,24 @@ Monetbil::setWidgetVersion('v2');
 
 ```
 
+### Manual Installation
+
+To use the SDK, include the `monetbil.php` file.
+
+```php
+<?php
+
+require_once '/path/to/monetbil-php/monetbil.php';
+
+### Dependencies
+
+The SDK require the following extensions in order to work properly:
+
+* `curl`
+* `json`
+
+```
+
 ### Payment Widget Usage
 
 #### Example 1
@@ -33,7 +55,7 @@ Monetbil::setWidgetVersion('v2');
 ```php
 <?php
 
-require_once 'monetbil.php';
+require_once '/path/to/monetbil-php/monetbil.php';
 
 // Setup Monetbil arguments
 Monetbil::setAmount(500);
@@ -45,7 +67,7 @@ Monetbil::setPayment_ref('d4be3535f9cb5a7aff1f84fa94e6f040');
 Monetbil::setUser(12);
 Monetbil::setFirst_name('KAMDEM');
 Monetbil::setLast_name('Jean');
-Monetbil::setEmail('sergentong@gmailcom');
+Monetbil::setEmail('jean.kamdem@emailcom');
 
 // Start a payment
 // You must be redirected to the payment page
@@ -58,7 +80,7 @@ Monetbil::startPayment();
 ```php
 <?php
 
-require_once 'monetbil.php';
+require_once '/path/to/monetbil-php/monetbil.php';
 
 // Setup Monetbil arguments
 $monetbil_args = array(
@@ -71,7 +93,7 @@ $monetbil_args = array(
     'user' => 12,
     'first_name' => 'KAMDEM',
     'last_name' => 'Jean',
-    'email' => 'user@emailcom'
+    'email' => 'jean.kamdem@emailcom'
 );
 
 // Start a payment
