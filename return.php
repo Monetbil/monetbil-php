@@ -21,7 +21,6 @@
         $transaction_id = Monetbil::getQuery('transaction_id');
 
         if ($transaction_id and ! Monetbil::checkSign($service_secret, $params)) {
-            //
             exit;
         }
 
