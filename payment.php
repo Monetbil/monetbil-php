@@ -19,9 +19,9 @@
         // Get Service
         $service = Monetbil::getService();
 
-        $logo = 'https://pbs.twimg.com/profile_images/594520561004507136/AcpQRaSA.png';
         $service_name = '';
         $company_name = '';
+        $logo = 'https://pbs.twimg.com/profile_images/594520561004507136/AcpQRaSA.png';
         if (array_key_exists('service_key', $service)
                 and array_key_exists('service_secret', $service)
                 and array_key_exists('service_name', $service)
