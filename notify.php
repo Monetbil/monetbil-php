@@ -14,9 +14,9 @@
 
 require_once 'monetbil.php';
 
-$service_secret = Monetbil::getServiceSecret();
 $params = Monetbil::getPost();
-$transaction_id = Monetbil::getQuery('transaction_id');
+$transaction_id = Monetbil::getPost('transaction_id');
+$service_secret = Monetbil::getServiceSecret();
 
 if (!$transaction_id or ! Monetbil::checkSign($service_secret, $params)) {
     header('HTTP/1.0 403 Forbidden');
