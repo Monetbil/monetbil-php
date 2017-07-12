@@ -39,14 +39,14 @@ To use the SDK, include the `monetbil.php` file.
 
 require_once '/path/to/monetbil-php/monetbil.php';
 
+```
+
 ### Dependencies
 
 The SDK require the following extensions in order to work properly:
 
 * `curl`
 * `json`
-
-```
 
 ### Payment Widget Usage
 
