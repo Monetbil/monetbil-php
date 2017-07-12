@@ -156,4 +156,25 @@ echo Monetbil::form($monetbil_args);
 
 ```
 
+*Example Response:*
+
+```html
+<form action="https://www.monetbil.com/widget/v2/j9XjZzkFqjeL5fk34e1RNq98thRRwvYf" method="post" data-monetbil="form">
+	<input type="hidden" name="amount" value="500">
+	<input type="hidden" name="phone" value="">
+	<input type="hidden" name="country" value="">
+	<input type="hidden" name="currency" value="XAF">
+	<input type="hidden" name="item_ref" value="2536">
+	<input type="hidden" name="payment_ref" value="d4be3535f9cb5a7aff1f84fa94e6f040">
+	<input type="hidden" name="user" value="12">
+	<input type="hidden" name="first_name" value="KAMDEM">
+	<input type="hidden" name="last_name" value="Jean">
+	<input type="hidden" name="email" value="jean.kamdem@email.com">
+	<input type="hidden" name="return_url" value="http://boorgeon.com/monetbil-php/monetbil/return.php">
+	<input type="hidden" name="notify_url" value="http://boorgeon.com/monetbil-php/monetbil/notify.php">
+	<button class="btn btn-block btn-primary m-t-20" type="submit" id="monetbil-payment-widget">Pay by Mobile Money</button>
+</form>
+<script type="text/javascript" src="assets/js/monetbil.min.js?t=1499851134"></script>
+
+```
 
