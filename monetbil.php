@@ -702,7 +702,7 @@ abstract class Monetbil
      */
     public static function form($monetbil_args = array(), $auto = '')
     {
-        $post_data  = Monetbil::mergeArguments($monetbil_args);
+        $post_data = Monetbil::mergeArguments($monetbil_args);
 
         $form = '<form action="' . Monetbil::getWidgetUrl() . '" method="post" data-monetbil="form">';
 
@@ -726,7 +726,7 @@ abstract class Monetbil
      */
     public static function startPayment($monetbil_args = array())
     {
-        $query_data  = Monetbil::mergeArguments($monetbil_args);
+        $query_data = Monetbil::mergeArguments($monetbil_args);
 
         $payment_url = Monetbil::getServerUrl() . Monetbil::getPath()
                 . '/payment.php?'
