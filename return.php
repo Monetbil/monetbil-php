@@ -16,13 +16,22 @@
         <?php
         require_once 'monetbil.php';
 
-        $service_secret = Monetbil::getServiceSecret();
         $params = Monetbil::getQueryParams();
-        $transaction_id = Monetbil::getQuery('transaction_id');
+        $service_secret = Monetbil::getServiceSecret();
 
-        if ($transaction_id and ! Monetbil::checkSign($service_secret, $params)) {
+        if (!Monetbil::checkSign($service_secret, $params)) {
             exit;
         }
+
+        $transaction_id = Monetbil::getQuery('transaction_id');
+        $status = Monetbil::getQuery('status');
+        $phone = Monetbil::getQuery('phone');
+        $user = Monetbil::getQuery('user');
+        $item_ref = Monetbil::getQuery('item_ref');
+        $payment_ref = Monetbil::getQuery('payment_ref');
+        $first_name = Monetbil::getQuery('first_name');
+        $last_name = Monetbil::getQuery('last_name');
+        $email = Monetbil::getQuery('email');
 
         list($payment_status) = Monetbil::checkPayment($transaction_id);
         ?>
