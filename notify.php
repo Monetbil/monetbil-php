@@ -15,13 +15,33 @@
 require_once 'monetbil.php';
 
 $params = Monetbil::getPost();
-$transaction_id = Monetbil::getPost('transaction_id');
 $service_secret = Monetbil::getServiceSecret();
 
-if (!$transaction_id or ! Monetbil::checkSign($service_secret, $params)) {
+if (!Monetbil::checkSign($service_secret, $params)) {
     header('HTTP/1.0 403 Forbidden');
     exit('Error: Invalid signature');
 }
+
+$service = Monetbil::getPost('service');
+$transaction_id = Monetbil::getPost('transaction_id');
+$transaction_uuid = Monetbil::getPost('transaction_uuid');
+$phone = Monetbil::getPost('msisdn');
+$amount = Monetbil::getPost('amount');
+$fee = Monetbil::getPost('fee');
+$status = Monetbil::getPost('status');
+$message = Monetbil::getPost('message');
+$country_name = Monetbil::getPost('country_name');
+$country_iso = Monetbil::getPost('country_iso');
+$country_code = Monetbil::getPost('country_code');
+$mccmnc = Monetbil::getPost('mccmnc');
+$operator = Monetbil::getPost('mobile_operator_name');
+$currency = Monetbil::getPost('currency');
+$user = Monetbil::getPost('user');
+$item_ref = Monetbil::getPost('item_ref');
+$payment_ref = Monetbil::getPost('payment_ref');
+$first_name = Monetbil::getPost('first_name');
+$last_name = Monetbil::getPost('last_name');
+$email = Monetbil::getPost('email');
 
 list($payment_status) = Monetbil::checkPayment($transaction_id);
 
