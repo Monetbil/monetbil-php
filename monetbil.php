@@ -46,6 +46,7 @@ abstract class Monetbil
     public static $first_name;
     public static $last_name;
     public static $email;
+    public static $locale;
     public static $return_url;
     public static $notify_url;
 
@@ -320,6 +321,27 @@ abstract class Monetbil
     public static function setEmail($email)
     {
         self::$email = $email;
+    }
+
+    /**
+     * getLocale
+     *
+     * @return string
+     */
+    public static function getLocale()
+    {
+        return self::$locale;
+    }
+
+    /**
+     * setLocale
+     *
+     * @param string $locale
+     * @return string
+     */
+    public static function setLocale($locale)
+    {
+        self::$locale = $locale;
     }
 
     /**
