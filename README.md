@@ -60,6 +60,7 @@ require_once '/path/to/monetbil-php/monetbil.php';
 // Setup Monetbil arguments
 Monetbil::setAmount(500);
 Monetbil::setCurrency('XAF');
+Monetbil::setLocale('en'); // Display language fr or en
 Monetbil::setPhone('');
 Monetbil::setCountry('');
 Monetbil::setItem_ref('2536');
@@ -86,6 +87,7 @@ require_once '/path/to/monetbil-php/monetbil.php';
 $monetbil_args = array(
     'amount' => 500,
     'phone' => '',
+    'locale' => 'en', // Display language fr or en
     'country' => '',
     'currency' => 'XAF',
     'item_ref' => '2536',
@@ -116,6 +118,7 @@ require_once '/path/to/monetbil-php/monetbil.php';
 // Setup Monetbil arguments
 Monetbil::setAmount(500);
 Monetbil::setCurrency('XAF');
+Monetbil::setLocale('en'); // Display language fr or en
 Monetbil::setPhone('');
 Monetbil::setCountry('');
 Monetbil::setItem_ref('2536');
@@ -141,6 +144,7 @@ require_once '/path/to/monetbil-php/monetbil.php';
 $monetbil_args = array(
     'amount' => 500,
     'phone' => '',
+    'locale' => 'en', // Display language fr or en
     'country' => '',
     'currency' => 'XAF',
     'item_ref' => '2536',
@@ -162,6 +166,7 @@ echo Monetbil::form($monetbil_args);
 <form action="https://www.monetbil.com/widget/v2/j9XjZzkFqjeL5fk34e1RNq98thRRwvYf" method="post" data-monetbil="form">
  <input type="hidden" name="amount" value="500">
  <input type="hidden" name="phone" value="">
+ <input type="hidden" name="locale" value="en">
  <input type="hidden" name="country" value="">
  <input type="hidden" name="currency" value="XAF">
  <input type="hidden" name="item_ref" value="2536">
@@ -199,6 +204,7 @@ require_once '/path/to/monetbil-php/monetbil.php';
 // Setup Monetbil arguments
 Monetbil::setAmount(500);
 Monetbil::setCurrency('XAF');
+Monetbil::setLocale('en'); // Display language fr or en
 Monetbil::setPhone('');
 Monetbil::setCountry('');
 Monetbil::setItem_ref('2536');
@@ -224,6 +230,7 @@ require_once '/path/to/monetbil-php/monetbil.php';
 $monetbil_args = array(
     'amount' => 500,
     'phone' => '',
+    'locale' => 'en', // Display language fr or en
     'country' => '',
     'currency' => 'XAF',
     'item_ref' => '2536',
@@ -243,7 +250,7 @@ echo Monetbil::link($monetbil_args);
 
 ```html
 
-<a class="btn btn-block btn-primary m-t-20" id="monetbil-payment-widget" href="https://www.monetbil.com/widget/v1/j9XjZzkFqjeL5fk34e1RNq98thRRwvYf?amount=500&amp;phone=&amp;country=&amp;currency=XAF&amp;item_ref=2536&amp;payment_ref=d4be3535f9cb5a7aff1f84fa94e6f040&amp;user=12&amp;first_name=KAMDEM&amp;last_name=Jean&amp;email=jean.kamdem%40email.com&amp;return_url=http%3A%2F%2Fboorgeon.com%2Fmonetbil-php%2Fmonetbil%2Freturn.php&amp;notify_url=http%3A%2F%2Fboorgeon.com%2Fmonetbil-php%2Fmonetbil%2Fnotify.php">Pay by Mobile Money</a>
+<a class="btn btn-block btn-primary m-t-20" id="monetbil-payment-widget" href="https://www.monetbil.com/widget/v1/j9XjZzkFqjeL5fk34e1RNq98thRRwvYf?amount=500&amp;phone=&amp;country=&amp;locale=en;currency=XAF&amp;item_ref=2536&amp;payment_ref=d4be3535f9cb5a7aff1f84fa94e6f040&amp;user=12&amp;first_name=KAMDEM&amp;last_name=Jean&amp;email=jean.kamdem%40email.com&amp;return_url=http%3A%2F%2Fboorgeon.com%2Fmonetbil-php%2Fmonetbil%2Freturn.php&amp;notify_url=http%3A%2F%2Fboorgeon.com%2Fmonetbil-php%2Fmonetbil%2Fnotify.php">Pay by Mobile Money</a>
 <script type="text/javascript" src="http://example.com/monetbil-php/monetbil/assets/js/monetbil-mobile-payments.js?t=1499852514"></script>
 
 ```
