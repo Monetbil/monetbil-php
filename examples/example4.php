@@ -18,6 +18,7 @@ require_once '../monetbil.php';
 $monetbil_args = array(
     'amount' => 500,
     'phone' => '',
+    'locale' => 'en', // Display language fr or en
     'country' => '',
     'currency' => 'XAF',
     'item_ref' => '2536',

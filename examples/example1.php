@@ -17,6 +17,7 @@ require_once '../monetbil.php';
 // Setup Monetbil arguments
 Monetbil::setAmount(500);
 Monetbil::setCurrency('XAF');
+Monetbil::setLocale('en'); // Display language fr or en
 Monetbil::setPhone('');
 Monetbil::setCountry('');
 Monetbil::setItem_ref('2536');

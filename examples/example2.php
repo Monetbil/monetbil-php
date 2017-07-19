@@ -16,9 +16,10 @@ require_once '../monetbil.php';
 
 // Setup Monetbil arguments
 $monetbil_args = array(
-    'amount' => 500,
-    'phone' => '',
-    'country' => '',
+    'amount' => 15,
+    'phone' => '654088375',
+    'locale' => 'en', // Display language fr or en
+    'country' => 'CM',
     'currency' => 'XAF',
     'item_ref' => '2536',
     'payment_ref' => 'd4be3535f9cb5a7aff1f84fa94e6f040',
