@@ -18,8 +18,8 @@ if (!defined('__MONETBIL__')) {
 }
 
 // To get your service key and secret, go to -> https://www.monetbil.com/services
-Monetbil::setServiceKey('j9XjZzkFqjeL5fk34e1RNq98thRRwvYf');
-Monetbil::setServiceSecret('oxr6Dyw80KlpJefIK7UyywXGHvkOM617wBBIXdZ1NTMWGZ9bSDyJmfX5oMI96204');
+Monetbil::setServiceKey('YOUR_SERVICE_KEY');
+Monetbil::setServiceSecret('YOUR_SERVICE_SECRET');
 
 // To use responsive widget, set version to 'v2'
 Monetbil::setWidgetVersion('v2');
