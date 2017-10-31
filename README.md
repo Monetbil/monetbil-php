@@ -25,8 +25,8 @@ The configuration is located in `config.php` file.
 Monetbil::setServiceKey('YOUR_SERVICE_KEY');
 Monetbil::setServiceSecret('YOUR_SERVICE_SERCRET');
 
-// To use responsive widget, set version to v2
-Monetbil::setWidgetVersion('v2');
+// To use responsive widget, set version to v2.1
+Monetbil::setWidgetVersion('v2.1');
 
 ```
 
@@ -104,9 +104,7 @@ Monetbil::startPayment($monetbil_args);
 
 ```
 
-### You can integrate the payment on your own page.
-
-#### For version 2
+### You can get the payment url.
 
 *Example 3:*
 
@@ -128,8 +126,8 @@ Monetbil::setFirst_name('KAMDEM');
 Monetbil::setLast_name('Jean');
 Monetbil::setEmail('jean.kamdem@email.com');
 
-// This example show payment form
-echo Monetbil::form();
+// This example show payment url
+echo Monetbil::url();
 
 ```
 
@@ -155,44 +153,19 @@ $monetbil_args = array(
     'email' => 'jean.kamdem@email.com'
 );
 
-// This example show payment form
-echo Monetbil::form($monetbil_args);
+// This example show payment url
+echo Monetbil::url($monetbil_args);
 
 ```
 
 *Example 3 and 4 response::*
 
 ```html
-<form action="https://www.monetbil.com/widget/v2/j9XjZzkFqjeL5fk34e1RNq98thRRwvYf" method="post" data-monetbil="form">
- <input type="hidden" name="amount" value="500">
- <input type="hidden" name="phone" value="">
- <input type="hidden" name="locale" value="en">
- <input type="hidden" name="country" value="">
- <input type="hidden" name="currency" value="XAF">
- <input type="hidden" name="item_ref" value="2536">
- <input type="hidden" name="payment_ref" value="d4be3535f9cb5a7aff1f84fa94e6f040">
- <input type="hidden" name="user" value="12">
- <input type="hidden" name="first_name" value="KAMDEM">
- <input type="hidden" name="last_name" value="Jean">
- <input type="hidden" name="email" value="jean.kamdem@email.com">
- <input type="hidden" name="return_url" value="http://example.com/monetbil-php/monetbil/return.php">
- <input type="hidden" name="notify_url" value="http://example.com/monetbil-php/monetbil/notify.php">
- <button class="btn btn-block btn-primary m-t-20" type="submit" id="monetbil-payment-widget">Pay by Mobile Money</button>
-</form>
-<script type="text/javascript" src="http://example.com/monetbil-php/monetbil/assets/js/monetbil.min.js"></script>
+https://www.monetbil.com/pay/v2.1/UXaJoEvDiVBrQX9p9FGoFanlmp6t3H
 
 ```
 
-#### For version 1
-
-Please, change widget version to `v1` in `config.php` file.
-
-```php
-<?php
-
-Monetbil::setWidgetVersion('v1');
-
-```
+### You can integrate the payment widget on your own page.
 
 *Example 5:*
 
@@ -214,44 +187,49 @@ Monetbil::setFirst_name('KAMDEM');
 Monetbil::setLast_name('Jean');
 Monetbil::setEmail('jean.kamdem@email.com');
 
-// This example show payment link
-echo Monetbil::link();
+// This example show payment button
+$payment_url = Monetbil::url();
+?>
+<style type="text/css">
+    .btnmnb {
+        background: #3498db;
+        background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+        background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+        background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+        background-image: -o-linear-gradient(top, #3498db, #2980b9);
+        background-image: linear-gradient(to bottom, #3498db, #2980b9);
+        font-family: Arial;
+        color: #ffffff;
+        font-size: 20px;
+        padding: 10px 20px 10px 20px;
+        text-decoration: none;
+        cursor: pointer;
+    }
 
-```
+    .btnmnb:hover {
+        background: #3cb0fd;
+        background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+        text-decoration: none;
+    }
+</style>
 
-*Or example 6:*
+<?php if (Monetbil::MONETBIL_WIDGET_VERSION_V2 == Monetbil::getWidgetVersion()): ?>
+    <form action="<?php echo $payment_url; ?>" method="post" data-monetbil="form">
+        <button type="submit" class="btnmnb" id="monetbil-payment-widget">Pay By Mobile Money</button>
+    </form>
+<?php else : ?>
+    <a class="btnmnb" href="<?php echo $payment_url; ?>" id="monetbil-payment-widget">Pay By Mobile Money</a>
+<?php endif; ?>
 
-```php
-<?php
+<!-- To open widget, add JS files -->
+<?php echo Monetbil::js(); ?>
 
-require_once '/path/to/monetbil-php/monetbil.php';
-
-// Setup Monetbil arguments
-$monetbil_args = array(
-    'amount' => 500,
-    'phone' => '',
-    'locale' => 'en', // Display language fr or en
-    'country' => '',
-    'currency' => 'XAF',
-    'item_ref' => '2536',
-    'payment_ref' => 'd4be3535f9cb5a7aff1f84fa94e6f040',
-    'user' => 12,
-    'first_name' => 'KAMDEM',
-    'last_name' => 'Jean',
-    'email' => 'jean.kamdem@email.com'
-);
-
-// This example show payment link
-echo Monetbil::link($monetbil_args);
-
-```
-
-*Example 5 and 6 response:*
-
-```html
-
-<a class="btn btn-block btn-primary m-t-20" id="monetbil-payment-widget" href="https://www.monetbil.com/widget/v1/j9XjZzkFqjeL5fk34e1RNq98thRRwvYf?amount=500&amp;phone=&amp;country=&amp;locale=en;currency=XAF&amp;item_ref=2536&amp;payment_ref=d4be3535f9cb5a7aff1f84fa94e6f040&amp;user=12&amp;first_name=KAMDEM&amp;last_name=Jean&amp;email=jean.kamdem%40email.com&amp;return_url=http%3A%2F%2Fboorgeon.com%2Fmonetbil-php%2Fmonetbil%2Freturn.php&amp;notify_url=http%3A%2F%2Fboorgeon.com%2Fmonetbil-php%2Fmonetbil%2Fnotify.php">Pay by Mobile Money</a>
-<script type="text/javascript" src="http://example.com/monetbil-php/monetbil/assets/js/monetbil-mobile-payments.js?t=1499852514"></script>
+<!-- To auto open widget, add JS files -->
+<?php echo Monetbil::js(true); ?>
 
 ```
 
