@@ -18,11 +18,10 @@ abstract class Monetbil
 {
 
     const WIDGET_URL = 'https://www.monetbil.com/widget/';
-    const GET_SERVICE_URL = 'https://api.monetbil.com/v1/services/get';
     const CHECK_PAYMENT_URL = 'https://api.monetbil.com/payment/v1/checkPayment';
     // Monetbil Widget version
     const MONETBIL_WIDGET_VERSION_V1 = 'v1';
-    const MONETBIL_WIDGET_VERSION_V2 = 'v2';
+    const MONETBIL_WIDGET_VERSION_V2 = 'v2.1';
     // Live mode
     const STATUS_SUCCESS = 1;
     const STATUS_FAILED = 0;
@@ -34,7 +33,7 @@ abstract class Monetbil
 
     public static $serviceKey;
     public static $serviceSecret;
-    public static $widgetVersion = 'v2';
+    public static $widgetVersion = 'v2.1';
     // Setup Monetbil arguments
     public static $amount;
     public static $currency;
@@ -387,39 +386,6 @@ abstract class Monetbil
     }
 
     /**
-     * getService
-     *
-     * @return array
-     */
-    public static function getService()
-    {
-        $postData = array(
-            'service_key' => Monetbil::getServiceKey(),
-            'service_secret' => Monetbil::getServiceSecret(),
-        );
-
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, Monetbil::GET_SERVICE_URL);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postData, '', '&'));
-        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-
-        $json = curl_exec($ch);
-        $result = json_decode($json, true);
-
-        if (is_array($result)) {
-            return $result;
-        }
-
-        return array();
-    }
-
-    /**
      * sign
      *
      * @param string $service_secret
@@ -541,6 +507,8 @@ abstract class Monetbil
      */
     public static function mergeArguments($monetbil_args)
     {
+        $sign = Monetbil::sign(Monetbil::getServiceSecret(), $monetbil_args);
+
         return array_merge(array(
             'amount' => Monetbil::getAmount(),
             'phone' => Monetbil::getPhone(),
@@ -553,7 +521,8 @@ abstract class Monetbil
             'last_name' => Monetbil::getLast_name(),
             'email' => Monetbil::getEmail(),
             'return_url' => Monetbil::getServerUrl() . Monetbil::getPath() . '/return.php',
-            'notify_url' => Monetbil::getServerUrl() . Monetbil::getPath() . '/notify.php'
+            'notify_url' => Monetbil::getServerUrl() . Monetbil::getPath() . '/notify.php',
+            'sign' => $sign
                 ), $monetbil_args);
     }
 
@@ -670,9 +639,10 @@ abstract class Monetbil
      *
      * @return string
      */
-    public static function getWidgetV1Url($monetbil_args)
+    public static function getWidgetV1Url($monetbil_args = array())
     {
-        $monetbil_v1_redirect = Monetbil::getWidgetUrl() . '?' . http_build_query($monetbil_args, '', '&');
+        $query_data = Monetbil::mergeArguments($monetbil_args);
+        $monetbil_v1_redirect = Monetbil::getWidgetUrl() . '?' . http_build_query($query_data, '', '&');
         return $monetbil_v1_redirect;
     }
 
@@ -682,10 +652,35 @@ abstract class Monetbil
      * @param array $monetbil_args
      * @return string
      */
-    public static function url($monetbil_args)
+    public static function url($monetbil_args = array())
     {
-        $url = Monetbil::getWidgetV1Url($monetbil_args);
-        return $url;
+        $query_data = Monetbil::mergeArguments($monetbil_args);
+        $payment_url = '';
+
+        if (self::MONETBIL_WIDGET_VERSION_V2 == self::getWidgetVersion()) {
+
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL, self::getWidgetUrl());
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_HEADER, 0);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($query_data, '', '&'));
+            curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+
+            $body = curl_exec($ch);
+            $result = json_decode($body, true);
+
+            if (is_array($result) and array_key_exists('payment_url', $result)) {
+                $payment_url = $result['payment_url'];
+            }
+        } else {
+            $payment_url = Monetbil::getWidgetV1Url($query_data);
+        }
+
+        return $payment_url;
     }
 
     /**
@@ -694,50 +689,30 @@ abstract class Monetbil
      * @param array $monetbil_args
      * @return string
      */
-    public static function redirect($monetbil_args)
-    {
-        $url = Monetbil::url($monetbil_args);
-        header("Location: $url");
-    }
-
-    /**
-     * link
-     *
-     * @param array $monetbil_args
-     * @return string
-     */
-    public static function link($monetbil_args = array(), $auto = '')
+    public static function redirect($monetbil_args = array())
     {
         $query_data = Monetbil::mergeArguments($monetbil_args);
-
         $url = Monetbil::url($query_data);
-        $link = '<a class="btn btn-block btn-primary m-t-20" id="monetbil-payment-widget" href="' . $url . '">Pay by Mobile Money</a>';
-        $link .= '<script type="text/javascript" src="' . Monetbil::getServerUrl() . Monetbil::getPath() . '/assets/js/monetbil-mobile-payments' . $auto . '.js?t=' . time() . '"></script>';
-        return $link;
+        header("Location: $url");
+        exit;
     }
 
     /**
-     * form
+     * js
      *
-     * @param array $monetbil_args
+     * @param bool $autoopen
      * @return string
      */
-    public static function form($monetbil_args = array(), $auto = '')
+    public static function js($autoopen = false)
     {
-        $post_data = Monetbil::mergeArguments($monetbil_args);
+        $auto = $autoopen ? '-auto' : '';
 
-        $form = '<form action="' . Monetbil::getWidgetUrl() . '" method="post" data-monetbil="form">';
-
-        foreach ($post_data as $key => $value) {
-            $form .= '<input type="hidden" name="' . $key . '" value="' . $value . '"/>';
+        if (self::MONETBIL_WIDGET_VERSION_V2 == self::getWidgetVersion()) {
+            $js = '<script type="text/javascript" src="' . Monetbil::getServerUrl() . Monetbil::getPath() . '/assets/js/monetbil' . $auto . '.min.js?t=' . time() . '"></script>';
+        } else {
+            $js = '<script type="text/javascript" src="' . Monetbil::getServerUrl() . Monetbil::getPath() . '/assets/js/monetbil-mobile-payments' . $auto . '.js?t=' . time() . '"></script>';
         }
-
-        $form .= '<button class="btn btn-block btn-primary m-t-20" type="submit" id="monetbil-payment-widget">Pay by Mobile Money</button>';
-
-        $form .= '</form>';
-        $form .= '<script type="text/javascript" src="' . Monetbil::getServerUrl() . Monetbil::getPath() . '/assets/js/monetbil' . $auto . '.min.js?t=' . time() . '"></script>';
-
-        return $form;
+        return $js;
     }
 
     /**
@@ -748,44 +723,7 @@ abstract class Monetbil
      */
     public static function startPayment($monetbil_args = array())
     {
-        $query_data = Monetbil::mergeArguments($monetbil_args);
-
-        $payment_url = Monetbil::getServerUrl() . Monetbil::getPath()
-                . '/payment.php?'
-                . http_build_query($query_data, '', '&');
-
-        header("Location: $payment_url");
-        exit;
-    }
-
-    /**
-     * formatInt
-     *
-     * @param string $string
-     * @return string
-     */
-    public static function formatInt($string)
-    {
-        $string = (string) $string;
-        $string2 = explode('.', $string);
-        $string3 = $string2[0];
-
-        $parts = array();
-        for ($index = strlen($string3) - 1, $i = 0; $index >= 0; $index--, $i++) {
-            if ($i > 0 and 0 == $i % 3) {
-                $parts[$i] = $string3[$index] . ' ';
-            } else {
-                $parts[$i] = $string3[$index];
-            }
-        }
-
-        $res = implode('', array_reverse($parts));
-
-        if (isset($string2[1])) {
-            $res = $res . '.' . $string2[1];
-        }
-
-        return $res;
+        Monetbil::redirect($monetbil_args);
     }
 
 }
