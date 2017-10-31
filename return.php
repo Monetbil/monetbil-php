@@ -20,7 +20,7 @@
         $service_secret = Monetbil::getServiceSecret();
 
         if (!Monetbil::checkSign($service_secret, $params)) {
-            exit;
+            exit('Invalid sign! Please, change service secret in config.php file.');
         }
 
         $transaction_id = Monetbil::getQuery('transaction_id');
