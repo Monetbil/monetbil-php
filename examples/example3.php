@@ -26,5 +26,5 @@ Monetbil::setFirst_name('KAMDEM');
 Monetbil::setLast_name('Jean');
 Monetbil::setEmail('jean.kamdem@email.com');
 
-// This example show payment form
-echo Monetbil::form();
+// This example show payment url
+echo Monetbil::url();

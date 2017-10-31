@@ -1,5 +1,4 @@
 <?php
-
 /*
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -11,6 +10,7 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 require_once '../monetbil.php';
 
 // Setup Monetbil arguments
@@ -26,5 +26,46 @@ Monetbil::setFirst_name('KAMDEM');
 Monetbil::setLast_name('Jean');
 Monetbil::setEmail('jean.kamdem@email.com');
 
-// This example show payment link
-echo Monetbil::link();
+// This example show payment button
+$payment_url = Monetbil::url();
+?>
+<style type="text/css">
+    .btnmnb {
+        background: #3498db;
+        background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+        background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+        background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+        background-image: -o-linear-gradient(top, #3498db, #2980b9);
+        background-image: linear-gradient(to bottom, #3498db, #2980b9);
+        font-family: Arial;
+        color: #ffffff;
+        font-size: 20px;
+        padding: 10px 20px 10px 20px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .btnmnb:hover {
+        background: #3cb0fd;
+        background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+        text-decoration: none;
+    }
+</style>
+
+<?php if (Monetbil::MONETBIL_WIDGET_VERSION_V2 == Monetbil::getWidgetVersion()): ?>
+    <form action="<?php echo $payment_url; ?>" method="post" data-monetbil="form">
+        <button type="submit" class="btnmnb" id="monetbil-payment-widget">Pay By Mobile Money</button>
+    </form>
+<?php else : ?>
+    <a class="btnmnb" href="<?php echo $payment_url; ?>" id="monetbil-payment-widget">Pay By Mobile Money</a>
+<?php endif; ?>
+
+<!-- To open widget, add JS files -->
+<?php echo Monetbil::js(); ?>
+
+<!-- To auto open widget, add JS files -->
+<?php //echo Monetbil::js(true); ?>

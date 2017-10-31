@@ -29,5 +29,5 @@ $monetbil_args = array(
     'email' => 'jean.kamdem@email.com'
 );
 
-// This example show payment form
-echo Monetbil::form($monetbil_args);
+// This example show payment url
+echo Monetbil::url($monetbil_args);
