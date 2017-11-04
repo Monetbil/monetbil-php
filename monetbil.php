@@ -520,8 +520,8 @@ abstract class Monetbil
             'first_name' => Monetbil::getFirst_name(),
             'last_name' => Monetbil::getLast_name(),
             'email' => Monetbil::getEmail(),
-            'return_url' => Monetbil::getServerUrl() . Monetbil::getPath() . '/return.php',
-            'notify_url' => Monetbil::getServerUrl() . Monetbil::getPath() . '/notify.php',
+            'return_url' => Monetbil::getReturn_url(),
+            'notify_url' => Monetbil::getNotify_url(),
             'sign' => $sign
                 ), $monetbil_args);
     }
