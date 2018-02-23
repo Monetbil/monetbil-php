@@ -69,6 +69,7 @@ Monetbil::setUser(12);
 Monetbil::setFirst_name('KAMDEM');
 Monetbil::setLast_name('Jean');
 Monetbil::setEmail('jean.kamdem@email.com');
+Monetbil::setLogo('https://storage.googleapis.com/cdn.ucraft.me/userFiles/ukuthulamovies/images/937-your-logo.png');
 
 // Start a payment
 // You will be redirected to the payment page
@@ -95,7 +96,8 @@ $monetbil_args = array(
     'user' => 12,
     'first_name' => 'KAMDEM',
     'last_name' => 'Jean',
-    'email' => 'jean.kamdem@email.com'
+    'email' => 'jean.kamdem@email.com',
+    'logo' => 'https://storage.googleapis.com/cdn.ucraft.me/userFiles/ukuthulamovies/images/937-your-logo.png'
 );
 
 // Start a payment
@@ -125,6 +127,7 @@ Monetbil::setUser(12);
 Monetbil::setFirst_name('KAMDEM');
 Monetbil::setLast_name('Jean');
 Monetbil::setEmail('jean.kamdem@email.com');
+Monetbil::setLogo('https://storage.googleapis.com/cdn.ucraft.me/userFiles/ukuthulamovies/images/937-your-logo.png');
 
 // This example show payment url
 echo Monetbil::url();
@@ -150,7 +153,9 @@ $monetbil_args = array(
     'user' => 12,
     'first_name' => 'KAMDEM',
     'last_name' => 'Jean',
-    'email' => 'jean.kamdem@email.com'
+    'email' => 'jean.kamdem@email.com',
+    'logo' => 'https://storage.googleapis.com/cdn.ucraft.me/userFiles/ukuthulamovies/images/937-your-logo.png'
+);
 );
 
 // This example show payment url
@@ -186,6 +191,7 @@ Monetbil::setUser(12);
 Monetbil::setFirst_name('KAMDEM');
 Monetbil::setLast_name('Jean');
 Monetbil::setEmail('jean.kamdem@email.com');
+Monetbil::setLogo('https://storage.googleapis.com/cdn.ucraft.me/userFiles/ukuthulamovies/images/937-your-logo.png');
 
 // This example show payment button
 $payment_url = Monetbil::url();
