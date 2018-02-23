@@ -48,6 +48,7 @@ abstract class Monetbil
     public static $locale;
     public static $return_url;
     public static $notify_url;
+    public static $logo;
 
     /**
      * getServiceKey
@@ -386,6 +387,27 @@ abstract class Monetbil
     }
 
     /**
+     * getLogo
+     *
+     * @return string
+     */
+    public static function getLogo()
+    {
+        return self::$logo;
+    }
+
+    /**
+     * setLogo
+     *
+     * @param string $logo
+     * @return string
+     */
+    public static function setLogo($logo)
+    {
+        self::$logo = $logo;
+    }
+
+    /**
      * sign
      *
      * @param string $service_secret
@@ -522,6 +544,7 @@ abstract class Monetbil
             'email' => Monetbil::getEmail(),
             'return_url' => Monetbil::getReturn_url(),
             'notify_url' => Monetbil::getNotify_url(),
+            'logo' => Monetbil::getLogo(),
             'sign' => $sign
                 ), $monetbil_args);
     }

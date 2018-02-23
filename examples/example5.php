@@ -25,6 +25,7 @@ Monetbil::setUser(12);
 Monetbil::setFirst_name('KAMDEM');
 Monetbil::setLast_name('Jean');
 Monetbil::setEmail('jean.kamdem@email.com');
+Monetbil::setLogo('https://storage.googleapis.com/cdn.ucraft.me/userFiles/ukuthulamovies/images/937-your-logo.png');
 
 // This example show payment button
 $payment_url = Monetbil::url();
@@ -60,7 +61,7 @@ $payment_url = Monetbil::url();
     <form action="<?php echo $payment_url; ?>" method="post" data-monetbil="form">
         <button type="submit" class="btnmnb" id="monetbil-payment-widget">Pay By Mobile Money</button>
     </form>
-<?php else : ?>
+<?php else: ?>
     <a class="btnmnb" href="<?php echo $payment_url; ?>" id="monetbil-payment-widget">Pay By Mobile Money</a>
 <?php endif; ?>
 
@@ -68,4 +69,5 @@ $payment_url = Monetbil::url();
 <?php echo Monetbil::js(); ?>
 
 <!-- To auto open widget, add JS files -->
-<?php //echo Monetbil::js(true); ?>
+<?php
+//echo Monetbil::js(true); ?>

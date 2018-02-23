@@ -26,6 +26,7 @@ Monetbil::setUser(12);
 Monetbil::setFirst_name('KAMDEM');
 Monetbil::setLast_name('Jean');
 Monetbil::setEmail('jean.kamdem@email.com');
+Monetbil::setLogo('https://storage.googleapis.com/cdn.ucraft.me/userFiles/ukuthulamovies/images/937-your-logo.png');
 
 // Start a payment
 // You will be redirected to the payment page

@@ -26,7 +26,8 @@ $monetbil_args = array(
     'user' => 12,
     'first_name' => 'KAMDEM',
     'last_name' => 'Jean',
-    'email' => 'jean.kamdem@email.com'
+    'email' => 'jean.kamdem@email.com',
+    'logo' => 'https://storage.googleapis.com/cdn.ucraft.me/userFiles/ukuthulamovies/images/937-your-logo.png'
 );
 
 // Start a payment
