@@ -64,7 +64,7 @@ Monetbil::setLocale('en'); // Display language fr or en
 Monetbil::setPhone('');
 Monetbil::setCountry('');
 Monetbil::setItem_ref('2536');
-Monetbil::setPayment_ref('d4be3535f9cb5a7aff1f84fa94e6f040');
+Monetbil::setPayment_ref(md5(uniqid()));
 Monetbil::setUser(12);
 Monetbil::setFirst_name('KAMDEM');
 Monetbil::setLast_name('Jean');
@@ -92,7 +92,7 @@ $monetbil_args = array(
     'country' => '',
     'currency' => 'XAF',
     'item_ref' => '2536',
-    'payment_ref' => 'd4be3535f9cb5a7aff1f84fa94e6f040',
+    'payment_ref' => md5(uniqid()),
     'user' => 12,
     'first_name' => 'KAMDEM',
     'last_name' => 'Jean',
@@ -122,7 +122,7 @@ Monetbil::setLocale('en'); // Display language fr or en
 Monetbil::setPhone('');
 Monetbil::setCountry('');
 Monetbil::setItem_ref('2536');
-Monetbil::setPayment_ref('d4be3535f9cb5a7aff1f84fa94e6f040');
+Monetbil::setPayment_ref(md5(uniqid()));
 Monetbil::setUser(12);
 Monetbil::setFirst_name('KAMDEM');
 Monetbil::setLast_name('Jean');
@@ -149,7 +149,7 @@ $monetbil_args = array(
     'country' => '',
     'currency' => 'XAF',
     'item_ref' => '2536',
-    'payment_ref' => 'd4be3535f9cb5a7aff1f84fa94e6f040',
+    'payment_ref' => md5(uniqid()),
     'user' => 12,
     'first_name' => 'KAMDEM',
     'last_name' => 'Jean',
@@ -186,7 +186,7 @@ Monetbil::setLocale('en'); // Display language fr or en
 Monetbil::setPhone('');
 Monetbil::setCountry('');
 Monetbil::setItem_ref('2536');
-Monetbil::setPayment_ref('d4be3535f9cb5a7aff1f84fa94e6f040');
+Monetbil::setPayment_ref(md5(uniqid()));
 Monetbil::setUser(12);
 Monetbil::setFirst_name('KAMDEM');
 Monetbil::setLast_name('Jean');
