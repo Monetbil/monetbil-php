@@ -69,6 +69,8 @@ Monetbil::setUser(12);
 Monetbil::setFirst_name('KAMDEM');
 Monetbil::setLast_name('Jean');
 Monetbil::setEmail('jean.kamdem@email.com');
+Monetbil::setReturn_url('your_redirect_url_after_payment');
+Monetbil::setNotify_url('your_notification_url_to_receive_payment_data');
 Monetbil::setLogo('https://storage.googleapis.com/cdn.ucraft.me/userFiles/ukuthulamovies/images/937-your-logo.png');
 
 // Start a payment
@@ -97,6 +99,8 @@ $monetbil_args = array(
     'first_name' => 'KAMDEM',
     'last_name' => 'Jean',
     'email' => 'jean.kamdem@email.com',
+    'return_url' => 'your_redirect_url_after_payment',
+    'notify_url' => 'your_notification_url_to_receive_payment_data',
     'logo' => 'https://storage.googleapis.com/cdn.ucraft.me/userFiles/ukuthulamovies/images/937-your-logo.png'
 );
 
@@ -127,6 +131,8 @@ Monetbil::setUser(12);
 Monetbil::setFirst_name('KAMDEM');
 Monetbil::setLast_name('Jean');
 Monetbil::setEmail('jean.kamdem@email.com');
+Monetbil::setReturn_url('your_redirect_url_after_payment');
+Monetbil::setNotify_url('your_notification_url_to_receive_payment_data');
 Monetbil::setLogo('https://storage.googleapis.com/cdn.ucraft.me/userFiles/ukuthulamovies/images/937-your-logo.png');
 
 // This example show payment url
@@ -154,6 +160,8 @@ $monetbil_args = array(
     'first_name' => 'KAMDEM',
     'last_name' => 'Jean',
     'email' => 'jean.kamdem@email.com',
+    'return_url' => 'your_redirect_url_after_payment',
+    'notify_url' => 'your_notification_url_to_receive_payment_data',
     'logo' => 'https://storage.googleapis.com/cdn.ucraft.me/userFiles/ukuthulamovies/images/937-your-logo.png'
 );
 );
@@ -191,6 +199,8 @@ Monetbil::setUser(12);
 Monetbil::setFirst_name('KAMDEM');
 Monetbil::setLast_name('Jean');
 Monetbil::setEmail('jean.kamdem@email.com');
+Monetbil::setReturn_url('your_redirect_url_after_payment');
+Monetbil::setNotify_url('your_notification_url_to_receive_payment_data');
 Monetbil::setLogo('https://storage.googleapis.com/cdn.ucraft.me/userFiles/ukuthulamovies/images/937-your-logo.png');
 
 // This example show payment button
