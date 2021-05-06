@@ -443,12 +443,13 @@ abstract class Monetbil
     }
 
     /**
-     * checkPayment
+     * getPaymentInfos
+     * Get all informations related to payment
      *
      * @param string $paymentId
-     * @return array ($payment_status, $testmode)
+     * @return array
      */
-    public static function checkPayment($paymentId)
+    public static function getPaymentInfos($paymentId)
     {
         $postData = array(
             'paymentId' => $paymentId
@@ -466,7 +467,18 @@ abstract class Monetbil
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
 
         $json = curl_exec($ch);
-        $result = json_decode($json, true);
+        return json_decode($json, true);
+    }
+
+    /**
+     * checkPayment
+     *
+     * @param string $paymentId
+     * @return array ($payment_status, $testmode)
+     */
+    public static function checkPayment($paymentId)
+    {
+        $result = self::getPaymentInfos($paymentId);
 
         $payment_status = 0;
         $testmode = 0;
